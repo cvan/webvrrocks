@@ -14,33 +14,30 @@ ga('send', 'pageview');
 domready(() => {
   var hash = window.location.hash;
   var html = document.documentElement;
-  var nav = document.querySelector('#nav');
-  var navToggleAnchor = nav.querySelector('#nav-menu');
+  var navToggle = document.querySelector('#nav-toggle');
   var directory = require('./directory');
 
-  var toggleNav = function (forceOpen) {
-    var shouldOpenNav = forceOpen || !html.getAttribute('data-nav-open');
-    html.setAttribute('data-nav-open', !!force);
+  var toggleNav = forceOpen => {
+    var shouldOpenNav = !!(forceOpen || !html.getAttribute('data-nav-open'));
+    html.setAttribute('data-nav-open', shouldOpenNav);
+    navToggle.classList.toggle('is-active', shouldOpenNav);
   };
 
-  if (hash === '#nav') {
-    toggleNav(true);
-  }
-
-  window.addEventListener('hashchange', e => {
-    // When the hamburger menu in the nav is clicked,
-    // remove the `#nav` hash from the URL.
+  var handleNavHash = () => {
     hash = window.location.hash;
     if (hash === '#nav') {
       window.history.replaceState({}, document.title,
         window.location.pathname + window.location.search);
       toggleNav(true);
     }
-  });
+  };
 
-  var nav = document.querySelector('#nav-toggle');
+  // When the hamburger menu in the nav is clicked,
+  // remove the `#nav` hash from the URL.
+  handleNavHash();
+  window.addEventListener('hashchange', handleNavHash);
 
-  navToggleAnchor.addEventListener('click', e => {
+  navToggle.addEventListener('click', e => {
     e.preventDefault();
     toggleNav();
   });

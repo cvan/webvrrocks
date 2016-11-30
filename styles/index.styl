@@ -82,13 +82,18 @@ ul li:before
 ul ul li:before
   content "○"
 
-.nav-list
+ul.nav-list
   margin 0
 
   li:before
     display none
 
-h1, h2, h3, h4, h5, h6
+h1,
+h2,
+h3,
+h4,
+h5,
+h6
   @extend .fancy-font
   a
     display block
@@ -97,7 +102,12 @@ h1, h2, h3, h4, h5, h6
 .main
   padding-top 2rem
 
-  h1, h2, h3, h4, h5, h6
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6
     font-weight 400
     margin 2.5rem 0 1.5rem
 
@@ -106,7 +116,11 @@ h1, h2, h3, h4, h5, h6
     line-height 1.2
     margin 0 0 2.5rem
 
-  h2, h3, h4, h5, h6
+  h2,
+  h3,
+  h4,
+  h5,
+  h6
     border-bottom 1px solid #eee
 
     &:hover
@@ -168,12 +182,9 @@ p code
   font-size 0.9rem
   padding 3px 5px
 
-// components
-
-.nav-primary-item-anchor-selected
-  background color-white
-  color color-black
-  font-weight 400
+.nav-item-page-anchor-selected
+  color color-white
+  font-weight 600
   opacity 1
   transition all 0s
 
@@ -200,21 +211,20 @@ p code
   // left 0
   // width nav-width
 
-  display flex
-  flex-direction row
-  height nav-height
-  text-decoration none
+  // display flex
+  // flex-direction row
+  // height nav-height
+  // text-decoration none
 
-  overflow hidden
+  // overflow hidden
   // padding-top 0
   width 100%
-  z-index 100
+  // z-index 100
   visibility visible
 
-
-// @media screen and (min-width: width-venti)
-//   .nav
-//     position static
+@media screen and (min-width: width-venti)
+  .nav
+    position static
 
 // @media screen and (min-width: mobile-width)
 //   .nav
@@ -226,32 +236,24 @@ p code
 @import 'rocks-masthead.styl'
 
 /*a*/.nav-toggle
-  background url(/img/menu-icon.svg) 50% no-repeat
-  display none
-  height nav-height
-  width nav-height
-
-  g
-    fill #3a46ff
+  outline unset
 
 /*span*/.nav-toggle-text
   @extend .hidden-text
 
-[data-current-path="/"]
-  /*a*/.nav-toggle
-    display flex
-
-/*li*/.nav-primary-item a
-  color color-black
+/*li*/.nav-item-page a
+  color color-white-soft
   display block
   font-size 1.2rem
+  font-weight 500
   padding 8px 2rem
   text-decoration none
   text-align center
-  &:hover,
+  &:hover
+    opacity 1
   &:active,
   &.active
-    @extend .nav-primary-item-anchor-selected
+    @extend .nav-item-page-anchor-selected
 
 .nav-footer
   padding 2rem
@@ -366,7 +368,7 @@ p code
 [data-current-path^="/spec"] nav a[href^="/spec"],
 [data-current-path^="/contributing"] nav a[href^="/contributing"],
 [data-current-path^="/rocks/about"] nav a[href^="/rocks/about"]
-  @extend .nav-primary-item-anchor-selected
+  @extend .nav-item-page-anchor-selected
 
 .nav-social-list
   font-size 0
@@ -374,10 +376,10 @@ p code
   text-align right
   width 100%
 
-.nav-social-item
+.nav-item-social
   display inline-block
   margin 0
-  + .nav-social-item
+  + .nav-item-social
     margin-left 20px
 
 .social-link
@@ -659,3 +661,10 @@ ul.asset-files-list
 // TODO: Remove when https://github.com/zeke/jus/issues/36 is fixed.
 #__bs_notify__
   display none !important
+
+@media screen and (min-width: width-grande)
+  /*li*/.nav-item-page a
+    font-weight 400
+
+  .nav-item-page-anchor-selected
+    font-weight 500
