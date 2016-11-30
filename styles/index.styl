@@ -58,11 +58,13 @@ li
   display block
 
 li:before
-  color rgba(0,0,0,.35)
+  color rgba(0,0,0,.25)
   display inline-block
 
 ul,
 ol
+  margin-left 2.5rem
+
   li:before
     display inline-block
     position absolute
@@ -71,6 +73,9 @@ ol
     padding-right 0
     text-align right
     width 3ch
+
+  li + li
+    margin-top .25rem
 
 ol li:before
   content counters(item, '.') '. '
@@ -95,6 +100,7 @@ h4,
 h5,
 h6
   @extend .fancy-font
+
   a
     display block
     text-decoration none
@@ -115,6 +121,10 @@ h6
     color #999
     line-height 1.2
     margin 0 0 2.5rem
+    font-weight 600
+
+  h2
+    font-weight 500
 
   h2,
   h3,
@@ -234,7 +244,38 @@ p code
 //     height nav-height
 //     text-decoration none
 
-@import 'rocks-masthead.styl'
+/*header*/.rocks-header
+  background color-white
+  height height-header-small
+  // overflow hidden
+  // text-overflow ellipsis
+  // white-space nowrap
+  width 100%
+
+/*a*/.rocks-link
+  // display flex
+  height 100%
+
+/*h1*/.rocks-logo
+  color color-branding-primary
+  font-size 1.3rem
+  font-weight 600
+  margin 0 10px
+
+/*strong*/.rocks-wordmark-webvr
+  color color-branding-primary
+
+/*span*/.rocks-wordmark-rocks
+  color color-black
+
+/*svg*/.rocks-icon
+  // order -1
+  height 40px
+  // width 150px
+  // display flex
+
+  path
+    fill color-branding-primary
 
 /*a*/.nav-toggle
   outline unset
@@ -281,7 +322,6 @@ p code
   padding-top .5rem
 
 .column
-  margin 0 auto
   max-width column-max-width
   position relative
 
@@ -291,7 +331,7 @@ p code
   width 100%
 
   .column
-    padding 2rem
+    padding 2.5rem
 
 [data-current-path^="/directory"],
 [data-current-path^="/assets"]
@@ -443,11 +483,6 @@ p code
 
   .github-edit-page-link
     background-position 0 .4rem
-
-.site-tagline
-  font-size 2rem
-  font-weight 300
-  color black
 
 img
   display block
@@ -670,11 +705,11 @@ ul.asset-files-list
     justify-content space-between
 
   .content
-    max-width width-venti
+    flex 3
 
-  .content
-
-    // width 500px
+    .column
+      max-width width-venti
+      padding 3rem
 
   .nav
     height auto
@@ -683,11 +718,16 @@ ul.asset-files-list
     position static
     flex 1
     max-width 400px
+    min-width 250px
+
+  /*li*/.nav-item-page a
+    padding-top 1rem
+    padding-bottom 1rem
 
   /*header*/.rocks-header
-    height auto
     outline 0
-    height 400px
+    height height-header-venti
+    background red
     // width 1000px
     // flex 1
     align-items center
@@ -696,7 +736,24 @@ ul.asset-files-list
     display flex
     // flex 1
     justify-content center
+    text-align center
 
-  /*li*/.nav-item-page a
-    padding-top 1rem
-    padding-bottom 1rem
+  /*h1*/.rocks-logo
+    display flex
+    font-size 3rem
+
+  /*strong*/.rocks-wordmark
+    display block
+    order 1
+
+  /*span*/.rocks-wordmark-rocks
+    color color-black
+
+  /*svg*/.rocks-icon
+    // order 1
+    height 80px
+    // width 150px
+    // display flex
+
+    path
+      fill color-branding-primary

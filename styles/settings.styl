@@ -3,7 +3,7 @@ color-branding-primary = #3a46ff
 color-main = #efefef
 color-main-darker = #333
 color-text-darker = #111
-color-text = #666
+color-text = #333
 color-text-light = #666
 color-link = #154cbd
 color-link-active = #2b43ff
@@ -12,8 +12,10 @@ color-link-hover = darken(#154cbd, 30%)
 color-white = #fff
 color-white-soft = darken(#fff, 15%)
 
+font-body = system, 'Helvetica Neue', Helvetica, sans-serif
+
 // Poppins source: https://fonts.google.com/specimen/Poppins
-font-body = Poppins, 'Helvetica Neue', Helvetica, system, sans-serif
+font-fancy = Poppins, system, 'Helvetica Neue', Helvetica, sans-serif
 
 // Hack source: https://github.com/chrissimpkins/Hack
 font-code = Hack, monospace
@@ -22,7 +24,8 @@ column-max-width = 600px
 logo-width = 300px
 mobile-width = 600px
 
-height-header = 50px
+height-header-small = 50px
+height-header-venti = 300px
 height-masthead = 400px
 
 width-small = 400px
@@ -43,7 +46,7 @@ z-index-github-repo-link = 1
 // utils / mixins
 
 .fancy-font
-  font-family font-body
+  font-family font-fancy
 
 .normal-font
   font-family font-body
