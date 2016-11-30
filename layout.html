@@ -139,9 +139,11 @@ engine: nunjucks
             {% endblock %}
           </header>
 
-          {% block body %}{{ body|safe }}{% endblock %}
+          <div class="body">
+            {% block body %}{{ body|safe }}{% endblock %}
+          </div>
 
-          <footer id="page-footer" class="page-footer">
+          <footer id="page-footer" class="page-footer" role="contentinfo">
             {% block footer_top %}
               <p class="edit-options">
                 <a href="{% if page.edit_url %}{{ page.edit_url }}{% else %}https://github.com/webvrrocks/webvrrocks/edit/master{{ page.path.relative }}{% endif %}" class="github-edit-page-link edit-page-link" id="edit-page-link"><span>Edit this page</span></a>
