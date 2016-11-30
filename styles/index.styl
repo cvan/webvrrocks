@@ -1,52 +1,8 @@
-@import 'syntax.styl'
-@import 'system-font.styl'
-@import 'monospace-font.styl'
-@import 'grid.styl'
-
-color-black = #111
-color-main = #efefef
-color-main-darker = #333
-color-text-darker = #111
-color-text = #666
-color-text-light = #666
-color-primary = rgb(42,170,125)
-color-link = #154cbd
-color-link-active = #2b43ff
-color-link-visited = #2b43ff
-color-link-hover = darken(#154cbd, 30%)
-
-font-body = 'Helvetica Neue', Helvetica, Arial, sans-serif
-font-code = monospace
-
-column-max-width = 600px
-logo-width = 300px
-mobile-width = 600px
-
-nav-height = 3.3rem
-nav-width = 30%
-
-github-repo-size = 20
-github-repo-size-with-units = github-repo-size px
-
-github-repo-padding = 10
-github-repo-padding-with-units = github-repo-padding px
-
-z-index-github-repo-link = 1
-
-// utils / mixins
-
-.fancy-font
-  font-family font-body
-
-.normal-font
-  font-family font-body
-
-.code-font
-  font-family font-code
-
-.centerer
-  display block
-  text-align center
+@import 'syntax'
+@import 'system-font'
+@import 'monospace-font'
+@import 'grid'
+@import 'settings'
 
 // global
 
@@ -236,28 +192,13 @@ p code
   height nav-height
   text-decoration none
 
-.site-logo
-  flex 1
-  display flex
-  justify-content center
-  align-items center
-
-.site-logo-image
-  background url('/img/rocks-logo.svg') no-repeat transparent center center
-  height 30px
-  width 50px
-
-.site-logo-text
-  font-size 1.3rem
-  font-weight 400
-  margin 0 10px
-  color #3A46FF
+@import 'rocks-masthead.styl'
 
 .nav-menu
-  background url('/img/menu-icon.svg') no-repeat transparent center center
-  width nav-height
-  height nav-height
+  background url(/img/menu-icon.svg) 50% no-repeat
   display none
+  height nav-height
+  width nav-height
 
 .nav-primary-item a
   color color-black
@@ -375,13 +316,13 @@ p code
   .nav-list
     display block
   .nav-menu
-    background url('/img/close-icon.svg') no-repeat transparent center center
+    background url(/img/close-icon.svg) 50% no-repeat
 
 @media screen and (max-width: mobile-width)
   [data-current-path="/"]
     .nav-header
       display flex
-    #main .site-logo
+    #main .rocks-masthead
       display none
   .nav
     height nav-height
