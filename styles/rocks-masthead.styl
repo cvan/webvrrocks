@@ -2,14 +2,15 @@
 
 /*header*/.rocks-header
   background color-black
-  height height-header
+  height height-masthead
   // overflow hidden
   // text-overflow ellipsis
   // white-space nowrap
   width 100%
 
 /*a*/.rocks-link
-  display block
+  display flex
+  height 100%
 
 /*h1*/.rocks-wordmark
   color color-branding-primary
@@ -32,19 +33,3 @@
 
   path
     fill color-branding-primary
-
-@media screen and (min-width: width-venti)
-  /*header*/.rocks-header
-    outline 0
-    flex 1
-    width 100%
-    // align-items center
-    // display flex
-    // flex 1
-    // justify-content center
-
-  body
-    justify-content space-between
-
-  .content
-    align-items bottom
