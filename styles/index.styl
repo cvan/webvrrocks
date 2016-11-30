@@ -183,8 +183,8 @@ p code
   overflow-y auto
   padding nav-height 0
   position fixed
-  top 0
   right 0
+  top 0
   width nav-width
 
 .nav-header
@@ -195,13 +195,13 @@ p code
 
 @import 'rocks-masthead.styl'
 
-.nav-menu
+/*a*/.nav-toggle
   background url(/img/menu-icon.svg) 50% no-repeat
   display none
   height nav-height
   width nav-height
 
-.nav-primary-item a
+/*li*/.nav-primary-item a
   color color-black
   display block
   font-size 1.2rem
@@ -212,10 +212,6 @@ p code
   &:active,
   &.active
     @extend .nav-primary-item-anchor-selected
-
-.nav.elastic
-  .nav-footer
-    bottom auto
 
 .nav-footer
   padding 2rem
@@ -308,14 +304,6 @@ p code
   &[data-qs-requires*="daydream"] .list-item:not([data-requires-for-google-daydream="yes"])
     display none
 
-[data-nav-open="true"]
-  .nav
-    height 100%
-  .nav-list
-    display block
-  .nav-menu
-    background url(/img/close-icon.svg) 50% no-repeat
-
 @media screen and (max-width: mobile-width)
   [data-current-path="/"]
     .nav-header
@@ -329,8 +317,6 @@ p code
     width 100%
     z-index 100
     visibility visible
-  .nav-menu
-    display block
   .nav-list
     display none
 

@@ -12,28 +12,40 @@ ga('create', 'UA-86987247-1', 'auto');
 ga('send', 'pageview');
 
 domready(() => {
+  var hash = window.location.hash;
   var html = document.documentElement;
   var nav = document.querySelector('#nav');
   var navToggleAnchor = nav.querySelector('#nav-menu');
   var directory = require('./directory');
 
-  if (window.location.pathname.indexOf('/directory') === 0) {
-    directory.init();
+  var toggleNav = function (forceOpen) {
+    var shouldOpenNav = forceOpen || !html.getAttribute('data-nav-open');
+    html.setAttribute('data-nav-open', !!force);
+  };
+
+  if (hash === '#nav') {
+    toggleNav(true);
   }
 
-  var nav = document.querySelector('.nav');
+  window.addEventListener('hashchange', e => {
+    // When the hamburger menu in the nav is clicked,
+    // remove the `#nav` hash from the URL.
+    hash = window.location.hash;
+    if (hash === '#nav') {
+      window.history.replaceState({}, document.title,
+        window.location.pathname + window.location.search);
+      toggleNav(true);
+    }
+  });
+
+  var nav = document.querySelector('#nav-toggle');
 
   navToggleAnchor.addEventListener('click', e => {
     e.preventDefault();
-    html.setAttribute('data-nav-open', html.getAttribute('data-nav-open') === 'true' ? 'false' : 'true');
+    toggleNav();
   });
 
-  // TODO: Debounce.
-  window.addEventListener('resize', () => {
-    if (nav.scrollHeight > nav.clientHeight) {
-      nav.classList.add('elastic');
-    } else {
-      nav.classList.remove('elastic');
-    }
-  });
+  if (window.location.pathname.indexOf('/directory') === 0) {
+    directory.init();
+  }
 });
