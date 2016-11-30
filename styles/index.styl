@@ -128,8 +128,10 @@ h6
     background color-black
     font-weight 600
     line-height 1.2
-    margin 0 -1.5rem 2.5rem
-    padding 1rem padding-content
+    margin 0 0 2.5rem
+    margin-left -(padding-content-int)rem
+    margin-right -(padding-content-int)rem
+    padding (padding-content-int / 2)rem padding-content
 
     a
       border 0
@@ -272,10 +274,16 @@ p code
   color color-branding-primary
   font-size 1.5rem
   font-weight 600
+  width 100%
+  width calc(100% - 60px)
 
 /*a*/.rocks-link
+  align-items center
   display flex
   height 100%
+  justify-content space-between
+
+  width 100%
 
 /*span*/.rocks-wordmark
   // background red
@@ -540,14 +548,11 @@ a.list-item-link
   flex 1
   font-size 1.5rem
   font-weight 400
-  // padding-left .75rem
   padding-right .75rem
   width 30%
 
 .list-item-screenshots
   flex 1
-  // order -1
-  // padding-right .75rem
   padding-left .75rem
   width 40%
 
@@ -747,6 +752,7 @@ ul.asset-files-list
 
   /*h1*/.rocks-logo
     font-size 3rem
+    width 100%
 
   /*a*/.rocks-link
     flex-direction column
@@ -765,4 +771,3 @@ ul.asset-files-list
   /*footer*/.nav-footer
     padding-left 0
     padding-right 0
-
