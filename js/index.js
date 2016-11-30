@@ -21,15 +21,22 @@ domready(() => {
   var directory = require('./directory');
 
   var toggleNav = forceOpen => {
-    var shouldOpenNav = !!(forceOpen || !html.getAttribute('data-nav-open'));
+    var shouldOpenNav = !!(forceOpen || html.getAttribute('data-nav-open') !== 'true');
+    console.log(shouldOpenNav)
     html.setAttribute('data-nav-open', shouldOpenNav);
     navToggle.classList.toggle('is-active', shouldOpenNav);
     nav.setAttribute('aria-expanded', shouldOpenNav);
   };
 
+  nav.addEventListener('click', e => {
+    var clickedEl = e.target;
+    if (clickedEl.matches && clickedEl.matches('.nav-item-page a')) {
+      clickedEl.classList.add('active');
+    }
+  });
+
   var addNavToggleListener = () => {
     navToggle.addEventListener('click', e => {
-      console.log(stylesheet)
       e.preventDefault();
       toggleNav();
     });

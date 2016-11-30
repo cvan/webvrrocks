@@ -205,15 +205,7 @@ p code
 .nav
   @extend .fancy-font
   background color-branding-primary
-  height 100%
-  overflow-y auto
-  // padding nav-height 0
-  position fixed
-  right 0
-  top 0
-  left 0
-  bottom 0
-  width nav-width
+
 
   // background color-main
   // font-weight 300
@@ -230,12 +222,53 @@ p code
   // flex-direction row
   // height nav-height
   // text-decoration none
+  // position fixed
+  // right 0
+  // top 0
+  // left 0
+  // bottom 0
+
+  position fixed
+  top 1rem
+  right 1rem
 
   // overflow hidden
   // padding-top 0
   width 100%
-  // z-index 100
-  visibility visible
+  height 100%
+  z-index z-index-nav
+
+  transition: width 0.4s, height 0.4s, transform 0.4s;
+  transition-timing-function: cubic-bezier(0.7,0,0.3,1);
+
+.nav,
+.nav > *
+  @extends .disappear
+
+[data-nav-open="true"]
+  .main
+    transition-delay 0s
+    transform translate3d(0,125px,0)
+    transform-origin top 0
+
+  .nav,
+  .nav > *
+    @extends .reappear
+
+  .nav
+    height 125px
+    overflow-y auto
+    transform translate3d(0,0,0)
+    transition-delay 0s
+    width 100%
+    right 0
+
+    a
+      opacity 1
+      transition opacity 0.4s 0.4s
+
+  /*a*/.nav-toggle
+    padding-right 2.1rem
 
 // @media screen and (min-width: mobile-width)
 //   .nav
@@ -278,11 +311,11 @@ p code
     fill color-branding-primary
 
 /*a*/.nav-toggle
-  backgound red
   outline unset
   position fixed
-  top .5rem
-  right .5rem
+  top 0
+  right 0
+  padding 1.5rem 1.5rem .5rem
   z-index z-index-nav-toggle
 
 /*span*/.nav-toggle-text
@@ -408,7 +441,7 @@ p code
 
 [data-current-path="/"] nav a[href="/"],
 [data-current-path^="/getting-started"]:not([data-current-path^="/getting-started/troubleshooting"]) nav a[href^="/getting-started"]:not([href^="/getting-started/troubleshooting"]),
-[data-current-path^="/browsers"]:not([data-current-path^="/browsers/changelog"]) nav a[href^="/browsers"]:not([href^="/browsers/changelog"]) a,
+[data-current-path^="/browsers"]:not([data-current-path^="/browsers/changelog"]) nav a[href^="/browsers"]:not([href^="/browsers/changelog"]),
 [data-current-path^="/browsers/changelog"] nav a[href^="/browsers/changelog"],
 [data-current-path^="/headsets"] nav a[href^="/headsets"],
 [data-current-path^="/getting-started/troubleshooting"] nav a[href^="/getting-started/troubleshooting"],
@@ -690,8 +723,8 @@ ul.asset-files-list
   display none !important
 
 @media screen and (min-width: width-grande)
-  // /*a*/.nav-toggle
-  //   display none
+  /*a*/.nav-toggle
+    display none
 
   /*li*/.nav-item-page a
     font-weight 400
@@ -713,6 +746,10 @@ ul.asset-files-list
   .main
     max-width width-venti
     padding 3rem
+
+  .nav,
+  .nav > *
+    @extends .reappear
 
   .nav
     height auto
