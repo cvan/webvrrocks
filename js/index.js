@@ -15,12 +15,14 @@ domready(() => {
   var hash = window.location.hash;
   var html = document.documentElement;
   var navToggle = document.querySelector('#nav-toggle');
+  var nav = document.querySelector('#nav');
   var directory = require('./directory');
 
   var toggleNav = forceOpen => {
     var shouldOpenNav = !!(forceOpen || !html.getAttribute('data-nav-open'));
     html.setAttribute('data-nav-open', shouldOpenNav);
     navToggle.classList.toggle('is-active', shouldOpenNav);
+    nav.setAttribute('aria-expanded', shouldOpenNav);
   };
 
   var handleNavHash = () => {
