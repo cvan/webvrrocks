@@ -188,6 +188,10 @@ p code
   opacity 1
   transition all 0s
 
+[data-nav-open="true"]
+  body
+    overflow-y hidden
+
 .nav
   @extend .fancy-font
   background color-branding-primary
@@ -198,6 +202,7 @@ p code
   right 0
   top 0
   left 0
+  bottom 0
   width nav-width
 
   // background color-main
@@ -223,8 +228,15 @@ p code
   visibility visible
 
 @media screen and (min-width: width-venti)
+  body
+    display flex
+
   .nav
+    height auto
+    order 1
     position static
+
+
 
 // @media screen and (min-width: mobile-width)
 //   .nav
@@ -241,16 +253,23 @@ p code
 /*span*/.nav-toggle-text
   @extend .hidden-text
 
+/*ul*/.nav-pages
+  // display block
+
 /*li*/.nav-item-page a
   color color-white-soft
   display block
   font-size 1.2rem
+  background red
+  border 1px solid blue
+  line-height 1.5
   font-weight 500
-  padding 8px 2rem
+  padding 1rem 2rem
   text-decoration none
-  text-align center
+
   &:hover
     opacity 1
+
   &:active,
   &.active
     @extend .nav-item-page-anchor-selected
@@ -441,24 +460,6 @@ p code
   font-size 2rem
   font-weight 300
   color black
-
-table.routes
-  border-collapse collapse
-  width 100%
-  tr
-    border-top 1px solid #ccc
-    &:first-child
-      border-top none
-  th, td
-    line-height 1.8
-    text-align left
-    &:first-child:after
-      content "→"
-      display block
-      float right
-      margin-right 20px
-      opacity 0.5
-      text-align right
 
 img
   display block
@@ -665,6 +666,13 @@ ul.asset-files-list
 @media screen and (min-width: width-grande)
   /*li*/.nav-item-page a
     font-weight 400
+    padding-top .75rem
+    padding-bottom .75rem
 
   .nav-item-page-anchor-selected
     font-weight 500
+
+@media screen and (min-width: width-venti)
+  /*li*/.nav-item-page a
+    padding-top 1rem
+    padding-bottom 1rem
