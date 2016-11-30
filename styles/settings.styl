@@ -41,6 +41,8 @@ github-repo-size-with-units = github-repo-size px
 github-repo-padding = 10
 github-repo-padding-with-units = github-repo-padding px
 
+z-index-nav = 1
+z-index-nav-toggle = 2
 z-index-github-repo-link = 1
 
 // utils / mixins
@@ -59,5 +61,8 @@ z-index-github-repo-link = 1
   text-align center
 
 .hidden-text
-  display block
-  text-indent -9999px
+  height 1px
+  overflow hidden
+  position absolute
+  top -10px
+  width 1px

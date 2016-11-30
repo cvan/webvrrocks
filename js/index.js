@@ -12,6 +12,8 @@ ga('create', 'UA-86987247-1', 'auto');
 ga('send', 'pageview');
 
 domready(() => {
+  var cssMain = document.head.querySelector('link[href*="/styles/index.css"]');
+  var cssLoaded = cssMain ? cssMain.sheet.cssRules.length : false;
   var hash = window.location.hash;
   var html = document.documentElement;
   var navToggle = document.querySelector('#nav-toggle');
@@ -25,9 +27,20 @@ domready(() => {
     nav.setAttribute('aria-expanded', shouldOpenNav);
   };
 
-  var handleNavHash = () => {
+  var addNavToggleListener = () => {
+    navToggle.addEventListener('click', e => {
+      console.log(stylesheet)
+      e.preventDefault();
+      toggleNav();
+    });
+  };
+
+  var handleNavHash = event => {
+    if (!cssLoaded) {
+      return;
+    }
     hash = window.location.hash;
-    if (hash === '#nav') {
+    if (hash === '#nav' || event && event.type === 'click') {
       window.history.replaceState({}, document.title,
         window.location.pathname + window.location.search);
       toggleNav(true);
@@ -39,10 +52,14 @@ domready(() => {
   handleNavHash();
   window.addEventListener('hashchange', handleNavHash);
 
-  navToggle.addEventListener('click', e => {
-    e.preventDefault();
-    toggleNav();
-  });
+  if (cssLoaded) {
+    addNavToggleListener();
+  } else {
+    cssMain.addEventListener('load', () => {
+      cssLoaded = true;
+      addNavToggleListener();
+    });
+  }
 
   if (window.location.pathname.indexOf('/directory') === 0) {
     directory.init();

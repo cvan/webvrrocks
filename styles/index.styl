@@ -278,7 +278,12 @@ p code
     fill color-branding-primary
 
 /*a*/.nav-toggle
+  backgound red
   outline unset
+  position fixed
+  top .5rem
+  right .5rem
+  z-index z-index-nav-toggle
 
 /*span*/.nav-toggle-text
   @extend .hidden-text
@@ -321,21 +326,19 @@ p code
 .nav-footer-item + .nav-footer-item a
   padding-top .5rem
 
-.column
-  max-width column-max-width
-  position relative
-
 .content
   background color-white
   position relative
   width 100%
 
-  .column
-    padding 2.5rem
+.main
+  max-width column-max-width
+  padding 2.5rem
+  position relative
 
 [data-current-path^="/directory"],
 [data-current-path^="/assets"]
-  .column
+  .main
     max-width 1000px
 
   &[data-qs-headset*="vive"] .list-item:not([data-support-for-htc-vive="yes"]):not([data-requires-for-htc-vive="yes"]),
@@ -465,8 +468,8 @@ p code
 .github-edit-page-link
   background url(/img/github-octocat.svg) no-repeat
   background-size github-repo-size-with-units auto
-  line-height github-repo-size-with-units
   display block
+  line-height github-repo-size-with-units
   min-height github-repo-size-with-units
   padding-left (github-repo-size + github-repo-padding)px
   z-index z-index-github-repo-link
@@ -687,8 +690,8 @@ ul.asset-files-list
   display none !important
 
 @media screen and (min-width: width-grande)
-  /*a*/.nav-toggle
-    display none
+  // /*a*/.nav-toggle
+  //   display none
 
   /*li*/.nav-item-page a
     font-weight 400
@@ -707,9 +710,9 @@ ul.asset-files-list
   .content
     flex 3
 
-    .column
-      max-width width-venti
-      padding 3rem
+  .main
+    max-width width-venti
+    padding 3rem
 
   .nav
     height auto
