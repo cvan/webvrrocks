@@ -1,8 +1,9 @@
-@import 'syntax'
 @import 'system-font'
 @import 'monospace-font'
-@import 'grid'
 @import 'settings'
+@import 'syntax'
+@import 'grid'
+@import 'hamburgers'
 
 // global
 
@@ -13,8 +14,9 @@
   margin 0
   padding 0
 
-html, body
-  background-color #fff
+html,
+body
+  background-color color-white
 
 html
   font-size 14px
@@ -116,7 +118,7 @@ h1,
 h1 a,
 h1 a:hover,
 h1 a:target
-  color color-primary
+  color color-branding-primary
 
 h2,
 h2 a,
@@ -169,7 +171,7 @@ p code
 // components
 
 .nav-primary-item-anchor-selected
-  background #fff
+  background color-white
   color color-black
   font-weight 400
   opacity 1
@@ -177,21 +179,49 @@ p code
 
 .nav
   @extend .fancy-font
-  background color-main
-  font-weight 300
+  background color-branding-primary
   height 100%
   overflow-y auto
-  padding nav-height 0
+  // padding nav-height 0
   position fixed
   right 0
   top 0
+  left 0
   width nav-width
 
-.nav-header
+  // background color-main
+  // font-weight 300
+  // height 100%
+  // overflow-y auto
+  // // padding nav-height 0
+  // position fixed
+  // right 0
+  // top 0
+  // left 0
+  // width nav-width
+
   display flex
   flex-direction row
   height nav-height
   text-decoration none
+
+  overflow hidden
+  // padding-top 0
+  width 100%
+  z-index 100
+  visibility visible
+
+
+// @media screen and (min-width: width-venti)
+//   .nav
+//     position static
+
+// @media screen and (min-width: mobile-width)
+//   .nav
+//     display flex
+//     flex-direction row
+//     height nav-height
+//     text-decoration none
 
 @import 'rocks-masthead.styl'
 
@@ -200,6 +230,16 @@ p code
   display none
   height nav-height
   width nav-height
+
+  g
+    fill #3a46ff
+
+/*span*/.nav-toggle-text
+  @extend .hidden-text
+
+[data-current-path="/"]
+  /*a*/.nav-toggle
+    display flex
 
 /*li*/.nav-primary-item a
   color color-black
@@ -233,7 +273,7 @@ p code
   padding-top .5rem
 
 .content
-  background #fff
+  background color-white
   padding 2rem
   position relative
   width 100%
@@ -242,13 +282,6 @@ p code
   margin 0 auto
   max-width column-max-width
   position relative
-
-[data-current-path="/"]
-  .nav-header
-    display none
-
-  .nav-header
-    display flex
 
 [data-current-path^="/directory"],
 [data-current-path^="/assets"]
@@ -304,21 +337,21 @@ p code
   &[data-qs-requires*="daydream"] .list-item:not([data-requires-for-google-daydream="yes"])
     display none
 
-@media screen and (max-width: mobile-width)
-  [data-current-path="/"]
-    .nav-header
-      display flex
-    #main .rocks-masthead
-      display none
-  .nav
-    height nav-height
-    overflow hidden
-    padding-top 0
-    width 100%
-    z-index 100
-    visibility visible
-  .nav-list
-    display none
+// @media screen and (max-width: mobile-width)
+//   [data-current-path="/"]
+//     .nav-header
+//       display flex
+//     #main .rocks-masthead
+//       display none
+//   .nav
+//     height nav-height
+//     overflow hidden
+//     padding-top 0
+//     width 100%
+//     z-index 100
+//     visibility visible
+//   .nav-list
+//     display none
 
 [data-current-path="/"] nav a[href="/"],
 [data-current-path^="/getting-started"]:not([data-current-path^="/getting-started/troubleshooting"]) nav a[href^="/getting-started"]:not([href^="/getting-started/troubleshooting"]),
@@ -574,7 +607,7 @@ legend
   border-right none
   border-top none
   box-shadow 0 2px 2px #ccc
-  color #fff
+  color color-white
   cursor pointer
   display inline-block
   font-family inherit
@@ -597,7 +630,7 @@ legend
     border-bottom 2px solid steelblue
     box-shadow 0 1px 4px #aaa
     background linear-gradient(#53aff, #5fcdff)
-    color #fff
+    color color-white
     line-height 4.35rem
     opacity 1
 

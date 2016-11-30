@@ -60,7 +60,7 @@ engine: nunjucks
     {% block scripts %}{% endblock %}
   </head>
   <body>
-    <header class="rocks-masthead">
+    <header class="rocks-header">
       <h1 class="rocks-wordmark">
         <a class="rocks-link" href="/">
           <strong class="rocks-wordmark-webvr">WebVR</strong><span class="rocks-wordmark-rocks">.Rocks</span>
@@ -74,9 +74,15 @@ engine: nunjucks
       </h1>
     </header>
 
-    <nav id="nav" class="nav" role="navigation" data-current-path="{{ page.href }}" data-current-file="{{ page.path.relative }}">
-      <a href="#nav" id="nav-menu" class="nav-menu"></div>
+    <a href="#nav" class="hamburger hamburger--stand nav-toggle" id="nav-toggle" tabindex="0"
+         aria-label="Menu" role="button" aria-controls="navigation">
+      <div class="hamburger-box">
+        <div class="hamburger-inner"></div>
+      </div>
+      <span class="nav-toggle-text">Menu</span>
+    </a>
 
+    <nav id="nav" class="nav" role="navigation" data-current-path="{{ page.href }}" data-current-file="{{ page.path.relative }}">
       <div id="nav-content" class="nav-content">
         <ul id="nav-primary-list" class="nav-list nav-primary-list">
           <li class="nav-item nav-primary-item"><a href="/getting-started">Getting Started</a></li>
