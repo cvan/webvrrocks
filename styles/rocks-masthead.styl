@@ -1,11 +1,12 @@
 @import 'settings'
 
 /*header*/.rocks-header
-  background color-white
+  background color-black
   height height-header
-  overflow hidden
-  text-overflow ellipsis
-  white-space nowrap
+  // overflow hidden
+  // text-overflow ellipsis
+  // white-space nowrap
+  width 100%
 
 /*a*/.rocks-link
   display block
@@ -34,7 +35,16 @@
 
 @media screen and (min-width: width-venti)
   /*header*/.rocks-header
-    align-items center
-    display flex
+    outline 0
     flex 1
-    justify-content center
+    width 100%
+    // align-items center
+    // display flex
+    // flex 1
+    // justify-content center
+
+  body
+    justify-content space-between
+
+  .content
+    align-items bottom

@@ -231,10 +231,14 @@ p code
   body
     display flex
 
+  .content
+    flex 2
+
   .nav
     height auto
     order 1
     position static
+    flex 1
 
 
 
@@ -260,15 +264,15 @@ p code
   color color-white-soft
   display block
   font-size 1.2rem
-  background red
-  border 1px solid blue
+  // background red
+  border-bottom 2px solid white
   line-height 1.5
   font-weight 500
   padding 1rem 2rem
   text-decoration none
 
   &:hover
-    opacity 1
+    color color-white
 
   &:active,
   &.active
@@ -277,18 +281,16 @@ p code
 .nav-footer
   padding 2rem
   transition .15s bottom ease-in-out
-  text-align right
   width 100%
 
 .nav-footer-item a
-  color color-text
+  color color-white-soft
   display block
   font-size 1rem
   text-decoration none
   white-space nowrap
   &:hover
-    color color-text-darker
-    opacity 1
+    color color-white
 
 .nav-footer-item + .nav-footer-item a
   padding-top .5rem
@@ -391,15 +393,14 @@ p code
 
 .nav-social-list
   font-size 0
-  padding 20px 2rem 0 0
-  text-align right
+  padding 2rem 0 0 2rem
   width 100%
 
 .nav-item-social
   display inline-block
   margin 0
   + .nav-item-social
-    margin-left 20px
+    margin-left 2rem
 
 .social-link
   svg
@@ -408,11 +409,11 @@ p code
     transform scale(1)
     width 20px
   path
-    fill color-text
+    fill color-white-soft
     transition .15s fill ease-in-out
   &:hover
     path
-      fill color-text-darker
+      fill color-white
     svg
       transform scale(1.2)
 
@@ -664,6 +665,9 @@ ul.asset-files-list
   display none !important
 
 @media screen and (min-width: width-grande)
+  /*a*/.nav-toggle
+    display none
+
   /*li*/.nav-item-page a
     font-weight 400
     padding-top .75rem
