@@ -1,0 +1,31 @@
+@media screen and (min-width: mobile-width)
+  .nav-primary-item a
+    text-align right
+
+  .content
+    left 0
+    padding 3rem
+    width (100% - nav-width)
+
+  [data-current-path="/"]
+    .nav-header
+      display none
+
+
+@media screen and (max-width: mobile-width)
+  [data-current-path="/"]
+    .nav-header
+      display flex
+    #main .rocks-masthead
+      display none
+  .nav
+    height nav-height
+    overflow hidden
+    padding-top 0
+    width 100%
+    z-index 100
+    visibility visible
+  .nav-menu
+    display block
+  .nav-list
+    display none

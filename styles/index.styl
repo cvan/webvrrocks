@@ -143,7 +143,8 @@ h3 a:hover
 .highlight
   margin-bottom 16px
 
-code
+code,
+pre
   @extend .code-font
   font-size 1rem
 
@@ -206,9 +207,7 @@ p code
   font-size 1.2rem
   padding 8px 2rem
   text-decoration none
-  text-align right
-  @media screen and (max-width: mobile-width)
-    text-align center
+  text-align center
   &:hover,
   &:active,
   &.active
@@ -239,13 +238,9 @@ p code
 
 .content
   background #fff
-  padding 3rem
+  padding 2rem
   position relative
-  width (100% - nav-width)
-  @media screen and (max-width: mobile-width)
-    left 0
-    padding 2rem
-    width 100%
+  width 100%
 
 .column
   margin 0 auto
@@ -255,6 +250,9 @@ p code
 [data-current-path="/"]
   .nav-header
     display none
+
+  .nav-header
+    display flex
 
 [data-current-path^="/directory"],
 [data-current-path^="/assets"]
