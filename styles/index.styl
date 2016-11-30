@@ -105,8 +105,8 @@ h6
     display block
     text-decoration none
 
-.main
-  padding-top 2rem
+/*main*/.main
+  padding padding-content
 
   h1,
   h2,
@@ -117,11 +117,26 @@ h6
     font-weight 400
     margin 2.5rem 0 1.5rem
 
+  h1,
+  h1 a
+    color color-white
+
+  > :first-child
+    margin-top -(padding-content)
+
   h1
-    color #999
-    line-height 1.2
-    margin 0 0 2.5rem
+    background color-black
     font-weight 600
+    line-height 1.2
+    margin 0 -1.5rem 2.5rem
+    padding 1rem padding-content
+
+    a
+      border 0
+      margin -(padding-content / 2) -(padding-content)
+      padding 1rem padding-content
+      &:hover
+        color color-link-bright
 
   h2
     font-weight 500
@@ -198,102 +213,73 @@ p code
   opacity 1
   transition all 0s
 
+.nav
+  @extend .fancy-font
+  background color-branding-primary
+  height 400px
+  overflow hidden
+  position fixed
+  right 0
+  text-align center
+  top 0
+  transition-delay .2s
+  width 100%
+  z-index z-index-nav
+
+.nav,
+.main
+  transition width .4s, height .4s, opacity .4s, transform .4s
+  transition-timing-function cubic-bezier(.7,0,.3,1)
+
+.nav,
+.nav > *
+  @extend .disappear
+
 [data-nav-open="true"]
   body
     overflow-y hidden
 
-.nav
-  @extend .fancy-font
-  background color-branding-primary
-
-
-  // background color-main
-  // font-weight 300
-  // height 100%
-  // overflow-y auto
-  // // padding nav-height 0
-  // position fixed
-  // right 0
-  // top 0
-  // left 0
-  // width nav-width
-
-  // display flex
-  // flex-direction row
-  // height nav-height
-  // text-decoration none
-  // position fixed
-  // right 0
-  // top 0
-  // left 0
-  // bottom 0
-
-  position fixed
-  top 1rem
-  right 1rem
-
-  // overflow hidden
-  // padding-top 0
-  width 100%
-  height 100%
-  z-index z-index-nav
-
-  transition: width 0.4s, height 0.4s, transform 0.4s;
-  transition-timing-function: cubic-bezier(0.7,0,0.3,1);
-
-.nav,
-.nav > *
-  @extends .disappear
-
-[data-nav-open="true"]
   .main
+    opacity .1
     transition-delay 0s
-    transform translate3d(0,125px,0)
-    transform-origin top 0
+    transform translate3d(0,400px,0)
 
   .nav,
   .nav > *
-    @extends .reappear
+    @extend .reappear
 
   .nav
-    height 125px
     overflow-y auto
-    transform translate3d(0,0,0)
-    transition-delay 0s
-    width 100%
-    right 0
-
+    transform translate3d(0,nav-height,0)
+    // transition-delay 0s
     a
       opacity 1
-      transition opacity 0.4s 0.4s
+      transition opacity .4s .4s
 
   /*a*/.nav-toggle
     padding-right 2.1rem
 
-// @media screen and (min-width: mobile-width)
-//   .nav
-//     display flex
-//     flex-direction row
-//     height nav-height
-//     text-decoration none
-
 /*header*/.rocks-header
   background color-white
+  background yellow  // XXX: temporary until homepage done
+  display flex
   height height-header-small
-  // overflow hidden
-  // text-overflow ellipsis
-  // white-space nowrap
+  align-items center
+  padding 1.5rem
   width 100%
-
-/*a*/.rocks-link
-  // display flex
-  height 100%
 
 /*h1*/.rocks-logo
   color color-branding-primary
-  font-size 1.3rem
+  font-size 1.5rem
   font-weight 600
-  margin 0 10px
+
+/*a*/.rocks-link
+  display flex
+  height 100%
+
+/*span*/.rocks-wordmark
+  // background red
+  display flex
 
 /*strong*/.rocks-wordmark-webvr
   color color-branding-primary
@@ -303,7 +289,9 @@ p code
 
 /*svg*/.rocks-icon
   // order -1
-  height 40px
+  flex 1
+  height auto
+  margin-right 1rem
   // width 150px
   // display flex
 
@@ -321,9 +309,6 @@ p code
 /*span*/.nav-toggle-text
   @extend .hidden-text
 
-/*ul*/.nav-pages
-  // display block
-
 /*li*/.nav-item-page a
   color color-white-soft
   display block
@@ -333,6 +318,7 @@ p code
   line-height 1.5
   font-weight 500
   padding 1rem 2rem
+  text-align left
   text-decoration none
 
   &:hover
@@ -342,12 +328,12 @@ p code
   &.active
     @extend .nav-item-page-anchor-selected
 
-.nav-footer
+/*footer*/.nav-footer
   padding 2rem
   transition .15s bottom ease-in-out
   width 100%
 
-.nav-footer-item a
+/*li*/.nav-footer-item a
   color color-white-soft
   display block
   font-size 1rem
@@ -356,18 +342,21 @@ p code
   &:hover
     color color-white
 
-.nav-footer-item + .nav-footer-item a
+/*li*/.nav-footer-item + /*li*/.nav-footer-item a
   padding-top .5rem
 
-.content
+/*div*/.content
   background color-white
   position relative
   width 100%
 
-.main
-  max-width column-max-width
-  padding 2.5rem
-  position relative
+  .main
+    position relative
+
+/*header*/.page-header,
+/*footer*/.page-footer
+  &:not(:empty)
+    padding 2rem
 
 [data-current-path^="/directory"],
 [data-current-path^="/assets"]
@@ -423,22 +412,6 @@ p code
   &[data-qs-requires*="daydream"] .list-item:not([data-requires-for-google-daydream="yes"])
     display none
 
-// @media screen and (max-width: mobile-width)
-//   [data-current-path="/"]
-//     .nav-header
-//       display flex
-//     #main .rocks-masthead
-//       display none
-//   .nav
-//     height nav-height
-//     overflow hidden
-//     padding-top 0
-//     width 100%
-//     z-index 100
-//     visibility visible
-//   .nav-list
-//     display none
-
 [data-current-path="/"] nav a[href="/"],
 [data-current-path^="/getting-started"]:not([data-current-path^="/getting-started/troubleshooting"]) nav a[href^="/getting-started"]:not([href^="/getting-started/troubleshooting"]),
 [data-current-path^="/browsers"]:not([data-current-path^="/browsers/changelog"]) nav a[href^="/browsers"]:not([href^="/browsers/changelog"]),
@@ -454,10 +427,12 @@ p code
 [data-current-path^="/rocks/about"] nav a[href^="/rocks/about"]
   @extend .nav-item-page-anchor-selected
 
-.nav-social-list
+/*ul*/.nav-social-list
   font-size 0
-  padding 2rem 0 0 2rem
   width 100%
+
+ul.nav-social-list
+  padding 2rem
 
 .nav-item-social
   display inline-block
@@ -479,14 +454,6 @@ p code
       fill color-white
     svg
       transform scale(1.2)
-
-@media screen and (max-width: mobile-width)
-  .nav-footer
-    text-align center
-
-  .nav-social-list
-    padding 10px
-    text-align center
 
 .edit-page-link
   display block
@@ -723,9 +690,6 @@ ul.asset-files-list
   display none !important
 
 @media screen and (min-width: width-grande)
-  /*a*/.nav-toggle
-    display none
-
   /*li*/.nav-item-page a
     font-weight 400
     padding-top .75rem
@@ -743,57 +707,62 @@ ul.asset-files-list
   .content
     flex 3
 
-  .main
+  .copy
     max-width width-venti
-    padding 3rem
+
+  /*a*/.nav-toggle
+    display none
 
   .nav,
   .nav > *
-    @extends .reappear
+    opacity 1
+    pointer-events auto
+    visibility visible
 
-  .nav
+  /*nav*/.nav
     height auto
     order 1
-    // margin-top -(height-masthead)
     position static
     flex 1
     max-width 400px
     min-width 250px
+    text-align left
 
   /*li*/.nav-item-page a
     padding-top 1rem
     padding-bottom 1rem
 
   /*header*/.rocks-header
-    outline 0
     height height-header-venti
-    background red
-    // width 1000px
-    // flex 1
-    align-items center
-    // flex 1
-
-    display flex
-    // flex 1
-    justify-content center
     text-align center
+    flex-direction column
+
+    // align-items center
+    // background color-white
+    // display flex
+    // height height-header-small
+    justify-content center
+    padding 1.5rem
+    // width 100%
 
   /*h1*/.rocks-logo
-    display flex
     font-size 3rem
 
-  /*strong*/.rocks-wordmark
-    display block
-    order 1
+  /*a*/.rocks-link
+    flex-direction column
 
-  /*span*/.rocks-wordmark-rocks
-    color color-black
+  /*span*/.rocks-wordmark
+    margin-top 1rem
 
   /*svg*/.rocks-icon
-    // order 1
-    height 80px
-    // width 150px
-    // display flex
+    display block
+    height 120px
+    margin-right 0
 
     path
       fill color-branding-primary
+
+  /*footer*/.nav-footer
+    padding-left 0
+    padding-right 0
+

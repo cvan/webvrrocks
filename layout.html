@@ -132,15 +132,17 @@ engine: nunjucks
 
       <main id="main" class="main" role="main">
         <header id="page-header" class="page-header">
-          {% block header %}
-            {% block header_top %}{% endblock %}
-            {% block header_bottom %}{% endblock %}
-          {% endblock %}
+          {%- block header %}
+            {%- block header_top %}{% endblock -%}
+            {%- block header_bottom %}{% endblock -%}
+          {% endblock -%}
         </header>
 
-        <div class="body">
-          {% block body %}{{ body|safe }}{% endblock %}
-        </div>
+        {% block body %}
+          <div class="body">
+            {{ body|safe }}
+          </div>
+        {% endblock %}
 
         <footer id="page-footer" class="page-footer" role="contentinfo">
           {% block footer_top %}

@@ -18,20 +18,37 @@ domready(() => {
   var html = document.documentElement;
   var navToggle = document.querySelector('#nav-toggle');
   var nav = document.querySelector('#nav');
+  var navOpen = false;
   var directory = require('./directory');
 
-  var toggleNav = forceOpen => {
-    var shouldOpenNav = !!(forceOpen || html.getAttribute('data-nav-open') !== 'true');
-    console.log(shouldOpenNav)
+  var setNav = shouldOpenNav => {
     html.setAttribute('data-nav-open', shouldOpenNav);
     navToggle.classList.toggle('is-active', shouldOpenNav);
     nav.setAttribute('aria-expanded', shouldOpenNav);
+    navOpen = shouldOpenNav;
+  };
+  var openNav = () => setNav(true);
+  var closeNav = () => setNav(false);
+  var toggleNav = forceOpen => {
+    var shouldOpenNav = !!(forceOpen || html.getAttribute('data-nav-open') !== 'true');
+    setNav(shouldOpenNav);
   };
 
   nav.addEventListener('click', e => {
     var clickedEl = e.target;
     if (clickedEl.matches && clickedEl.matches('.nav-item-page a')) {
       clickedEl.classList.add('active');
+      return;
+    }
+    if (navOpen && !clickedEl.closest('#nav')) {
+      closeNav();
+    }
+  });
+
+  window.addEventListener('keyup', e => {
+    if (e.keyCode === 27) {
+      // Exit nav when Escape key pressed.
+      closeNav();
     }
   });
 
