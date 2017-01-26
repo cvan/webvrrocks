@@ -76,12 +76,21 @@ function regenerateAllNunjucksTemplates () {
   return shell.exec(`node ./node_modules/.bin/nunjucks "${OPTS.nunjucks.glob.include}" --path ${OPTS.nunjucks.inputDir} --unsafe --extensions ${OPTS.nunjucks.extensionsFile} --out ${OPTS.nunjucks.outputDir}`);
 }
 
-var app = budo
-  .cli(process.argv.slice(2), {
-    live: budoLiveOpts,
-    middleware: budoMiddleware
-  })
-  .on('connect', function (evt) {
+var jsFileEntry = path.join(OPTS.assets.inputDir, 'media', 'js', 'main.js');
+
+var app = budo(jsFileEntry, {
+  dir: OPTS.assets.outputDir,
+  port: process.env.WEBVRROCKS_PORT || process.env.PORT || 3000,
+  // host: 'localhost',
+  serve: path.join(OPTS.assets.outputDir, 'media', 'js', 'main.js'),
+  cors: true,
+  live: budoLiveOpts,
+  watchGlob: '**.{html,css,svg,jpg,png,json}',
+  middleware: budoMiddleware
+});
+
+app.on('connect', function (evt) {
+  console.log('connected')
     var wss = evt.webSocketServer;
 
     // Receiving messages from clients.
@@ -97,10 +106,23 @@ var app = budo
     regenerateAllNunjucksTemplates();
   })
   .on('reload', function (file) {
-    var parentDir = file.split(path.sep)[0];
+    if (path.normalize(file) === path.normalize(jsFileEntry)) {
+      console.log('Skipping bundle');
+      return;
+    }
+    var ext = path.extname(file).toLowerCase();
+    var fileRelative;
+    if (ext === '.html') {
+      fileRelative = path.relative(OPTS.nunjucks.inputDir, file);
+    } else {
+      fileRelative = path.relative(OPTS.assets.inputDir, file);
+    }
+    var parentDir = fileRelative.split(path.sep)[0];
     if (parentDir) {
       parentDir = path.join(__dirname, parentDir.toLowerCase());
     }
+    console.log('reload', file, parentDir);
+
     if (!parentDir ||
         parentDir === OPTS.assets.outputDir ||
         parentDir === OPTS.nunjucks.outputDir) {
@@ -110,23 +132,25 @@ var app = budo
 
     console.log('File reloaded:', file);
 
-    var ext = path.extname(file).toLowerCase();
-    var fileRelative;
     if (ext === '.html') {
-      fileRelative = path.relative(OPTS.nunjucks.inputDir, file);
+      fileRelative = path.relative(OPTS.nunjucks.inputDir, fileRelative);
       if (fileRelative[0] === '_') {
         regenerateAllNunjucksTemplates();
-      } else {
-        shell.exec(`node ./node_modules/.bin/nunjucks ${fileRelative} --path ${OPTS.nunjucks.inputDir} --unsafe --extensions ${OPTS.nunjucks.extensionsFile} --out ${OPTS.nunjucks.outputDir}`);
+        return;
       }
-    } else {
-      fileRelative = path.relative(OPTS.assets.inputDir, file);
-      var fileOutput = path.join(OPTS.assets.outputDir, fileRelative);
-      var fileOutputDir = path.dirname(fileOutput);
-      console.log('Copying: %s', fileRelative);
-      shell.mkdir('-p', fileOutputDir);
-      shell.cp(file, fileOutput);
+      shell.exec(`node ./node_modules/.bin/nunjucks ${fileRelative} --path ${OPTS.nunjucks.inputDir} --unsafe --extensions ${OPTS.nunjucks.extensionsFile} --out ${OPTS.nunjucks.outputDir}`);
     }
+    if (ext === '.json') {
+      console.log('regenerate', ext);
+      regenerateAllNunjucksTemplates();
+      return;
+    }
+    var fileOutput = path.relative(OPTS.assets.outputDir, fileRelative);
+    console.log('>>>', OPTS.assets.outputDir, fileOutput, fileRelative);
+    var fileOutputDir = path.dirname(fileOutput);
+    console.log('Copying: %s', fileRelative, fileOutput);
+    // shell.mkdir('-p', fileOutputDir);
+    // shell.cp(file, fileOutput);
   });
 
 module.exports = app;
