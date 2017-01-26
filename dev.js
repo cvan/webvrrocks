@@ -25,6 +25,10 @@ var OPTS = {
     extensionsFile: path.resolve(__dirname, 'nunjucks-helpers.js'),
     inputDir: path.resolve(__dirname, 'public'),
     outputDir: path.resolve(__dirname, '_prod')
+  },
+  database: {
+    inputDir: path.resolve(__dirname, 'public', '_db'),
+    outputDir: path.resolve(__dirname, '_prod', '_db')
   }
 };
 OPTS.routerPath = path.join(OPTS.assets.inputDir, 'ROUTER');
@@ -73,7 +77,8 @@ if (fs.existsSync(OPTS.routerPath)) {
 }
 
 function regenerateAllNunjucksTemplates () {
-  return shell.exec(`node ./node_modules/.bin/nunjucks "${OPTS.nunjucks.glob.include}" --path ${OPTS.nunjucks.inputDir} --unsafe --extensions ${OPTS.nunjucks.extensionsFile} --out ${OPTS.nunjucks.outputDir}`);
+  shell.exec(`node ./node_modules/.bin/nunjucks "${OPTS.nunjucks.glob.include}" --path ${OPTS.nunjucks.inputDir} --unsafe --extensions ${OPTS.nunjucks.extensionsFile} --out ${OPTS.nunjucks.outputDir}`);
+  shell.rm('-rf', OPTS.database.outputDir);
 }
 
 var app = budo
@@ -86,11 +91,14 @@ var app = budo
 
     // Receiving messages from clients.
     wss.on('connection', function (socket) {
-      console.log('[LiveReload] Client Connected')
+      console.log('[LiveReload] Client Connected');
       // socket.on('message', function (message) {
       //   console.log('[LiveReload] Message from client:', JSON.parse(message));
       // });
     });
+
+    shell.mkdir('-p', OPTS.database.inputDir);
+    // shell.exec(`NODE_ENV='production' node ./node_modules/webvrrocks-tasks/cron.js ${OPTS.database.inputDir} &`);
 
     shell.rm('-rf', OPTS.assets.outputDir, OPTS.nunjucks.outputDir);
     shell.cp('-R', OPTS.assets.inputDir, OPTS.assets.outputDir);
@@ -103,7 +111,8 @@ var app = budo
     }
     if (!parentDir ||
         parentDir === OPTS.assets.outputDir ||
-        parentDir === OPTS.nunjucks.outputDir) {
+        parentDir === OPTS.nunjucks.outputDir ||
+        parentDir === OPTS.database.outputDir) {
       // Do not reload files in `_prod/` directory.
       return;
     }
