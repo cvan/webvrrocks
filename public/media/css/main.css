@@ -483,6 +483,7 @@ ul.site-nav-list {
 
 ul.site-nav-list li {
   list-style-type: none;
+  position: relative;
 }
 
 .site-nav a {
@@ -774,6 +775,26 @@ a.button-source:after {
 
 [data-debug] .section {
   background-color: orange;
+}
+
+[data-slug="slack"] a {
+  position: relative;
+}
+
+[data-slug="slack"] a:before {
+  background: url(/media/img/slack-color.svg) no-repeat;
+  background-size: cover;
+  content: "";
+  display: inline-block;
+  /*top: -.5rem;*/
+  /*margin-top: -3rem;*/
+  position: relative;
+  /*top: 1.1rem;*/
+  /*margin-top: 3rem;*/
+  /*vertical-align: middle;*/
+  height: 1.5rem;
+  width: 2rem;
+  /*text-indent: 8rem;*/
 }
 
 /**
