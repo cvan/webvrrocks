@@ -1,0 +1,36 @@
+{% from '_helpers.html' import author_item, db, experience_item %}
+{% set page = 'demos.html' %}
+<!doctype html>
+<html lang="en" data-layout="secondary demos">
+  <head>
+    {% include '_head.html' %}
+    <title>Demos • WebVR Rocks</title>
+  </head>
+  <body>
+    <header id="header" class="header" role="banner">
+      <div class="container section">
+        {% include '_logo.html' %}
+
+        <a class="browser-link" href="/demos">
+          <h1 class="browser-name">Demos</h1>
+        </a>
+      </div>
+    </header>
+
+    <main id="main" class="main" role="main">
+      <div class="container">
+
+        <section id="demos" class="section demos" data-section="demos">
+          <ul data-section="demos" class="matrix grid-flex-container">
+            {% for _, k in db.sites %}
+              {% set site = k.fields %}
+              {{ experience_item(site) }}
+            {% endfor %}
+          </ul>
+        </section>
+      </div>
+    </main>
+
+    {% include '_footer.html' %}
+  </body>
+</html>
