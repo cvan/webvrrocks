@@ -1,0 +1,38 @@
+{% set slug = 'oculus_rift' %}
+
+{% extends '_layout_headset.html' %}
+
+{% block instructions %}
+  <ol class="bullets-light">
+    <li><span>Download and run the <a href="https://www2.oculus.com/download_app/?id=1582076955407037">Oculus Rift Performance Test</a> to ensure your machine meets the minimum requirements to enjoy VR in the Oculus Rift.</span></li>
+    <li><span>Download and install a <a href="#browsers">WebVR-capable browser</a>.</span></li>
+  </ol>
+  <p>You may wish to upgrade your Windows PC manually, order/build a new custom machine, or purchase a <a href="https://www.oculus.com/oculus-ready-pcs/">pre-built Rift-ready PC</a>.</p>
+  <p>(If needed, refer to the <a href="https://product-guides.oculus.com/en-us/documentation/rift/latest/concepts/rgsg-2-hw-hardware-setup/">Rift Hardware Setup giode</a> or the <a href="https://product-guides.oculus.com/en-us/documentation/rift/latest/concepts/rug-1-us-using-rift/">Rift User Guide</a>.)</p>
+{% endblock %}
+
+{% block browsers %}
+  <h3><a href="{{ browsers.firefox.about }}" itemprop="aboutUrl">Firefox</a></h3>
+  <p><a class="button button-outlined-approve button-download" href="{{ browser.firefox.about }}" itemprop="aboutUrl">Download</a></p>
+  <h3><a href="{{ browsers.chromium.about }}" itemprop="aboutUrl">Chromium</a></h3>
+  <p><a class="button button-outlined-approve button-download" href="{{ browser.chromium.about }}" itemprop="aboutUrl">Download</a></p>
+{% endblock %}
+
+{% block demos %}
+  {{ demo_item('a_blast') }}
+  {{ demo_item('a_painter') }}
+  {{ demo_item('dark_haze') }}
+{% endblock %}
+
+{% block info %}
+  <dl>
+    <dt id="when_is_support_landing_in_release_channel_browsers"><a href="#when_is_support_landing_in_release_channel_browsers">When is WebVR support for the Oculus Rift landing in release-channel browsers?</a></dt>
+    <dd>WebVR support for the Oculus Rift is estimated to ship in mid-2017 in the stable, release-channel versions of both <a href="{{ browsers.firefox.about }}">{{ browsers.firefox.name }}</a> and <a href="{{ browsers.chrome.about }}">{{ browsers.chrome.name }}</a>.</dd>
+    <dt id="can_i_still_use_a_dk2"><a href="#can_i_still_use_a_dk2">Can I still use an Oculus Rift Developer Kit 2 (DK2)?</a></dt>
+    <dd>
+      <p>
+        If you have an <a href="https://static.oculus.com/sdk-downloads/documents/Oculus_Rift_DK2_Instruction_Manual.pdf">Oculus Rift DK2</a>, you may still be able to follow these same instructions to use WebVR, but there are no guarantees of stability nor performance.
+      </p>
+    </dd>
+  </dl>
+{% endblock %}

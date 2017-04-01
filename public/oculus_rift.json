@@ -1,33 +1,22 @@
 {
   "@context": "http://schema.org",
   "@type": "Product",
-  "name": "HTC VIVE",
-  "slug": "htc_vive",
-  "description": "Roomscale VR for SteamVR and OpenVR",
-  "description_html": "Roomscale VR for <a href=\"http://store.steampowered.com/steamvr\">SteamVR</a> and <a href=\"https://github.com/ValveSoftware/openvr\">OpenVR</a>",
+  "name": "Oculus Rift",
+  "slug": "oculus_rift",
+  "description": "VR headset for standing and sitting experiences",
+  "description_html": "VR headset for standing and sitting experiences",
   "operatingSystem": "Windows 7.1+",
   "processorRequirements": "IA64",
-  "logo": "/htc_vive/logo.png",
-  "image": "/htc_vive/photo.png",
-  "pictogram": "/htc_vive/pictogram.svg",
+  "logo": "/oculus_rift/logo.png",
+  "pictogram": "/oculus_rift/pictogram.svg",
   "screenshot": "",
-  "url": "/htc_vive",
-  "about": "/htc_vive",
-  "sameAs": [
-    "https://www.vive.com/",
-    "http://store.steampowered.com/steamvr",
-    "https://github.com/ValveSoftware/openvr"
-  ],
+  "url": "/oculus_rift",
+  "about": "/oculus_rift",
   "creator": [
     {
       "@type": "Company",
-      "name": "HTC",
-      "sameAs": "https://www.htc.com/"
-    },
-    {
-      "@type": "Company",
-      "name": "Valve Corporation",
-      "sameAs": "http://www.valvesoftware.com/"
+      "name": "Oculus VR, LLC",
+      "sameAs": "https://www.oculus.com/"
     }
   ],
   "keywords": "headset",
@@ -50,8 +39,7 @@
   ],
   "requirements": [
     "https://www3.oculus.com/setup/",
-    "https://www.vive.com/us/setup/",
-    "http://store.steampowered.com/app/323910"
+    "https://www.vive.com/us/setup/"
   ],
   "fileSize": "93 MB",
   "license": "",
@@ -64,7 +52,7 @@
   "alternateName": "Chromium WebVR",
   "audio": "",
   "platforms": {
-    "htc_vive": {
+    "oculus_rift": {
       "windows": "supported",
       "mac": "headset_unsupported",
       "linux": "headset_unsupported",
@@ -99,7 +87,7 @@
       "android": "supported",
       "ios": "browser_unsupported"
     },
-    "windows_mixed_reality": {
+    "microsoft_hololens": {
       "windows": "browser_unsupported",
       "mac": "headset_unsupported",
       "linux": "headset_unsupported",
