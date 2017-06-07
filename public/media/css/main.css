@@ -362,6 +362,10 @@ h1.page-heading {
   max-width: 40px;
 }
 
+[data-headset~="google_cardboard"] .headset-icon {
+  max-width: 120px;
+}
+
 [data-supports-touch="true"] .page-heading-link:active .page-heading-icon,
 [data-supports-touch="false"] .page-heading-link:hover .page-heading-icon {
   opacity: 1;
@@ -372,8 +376,12 @@ html[data-layout~="headset"][data-layout~="htc_vive"] body {
   background-color: #eafbff;
 }
 
+html[data-layout~="headset"][data-layout~="google_cardboard"],
+html[data-layout~="headset"][data-layout~="google_cardboard"] body {
+  background-color: #fffceb;
+}
+
 html[data-layout~="headset"][data-layout~="htc_vive"] .page-heading {
-  /*color: #00718d;*/
   color: #111;
 }
 
@@ -1385,6 +1393,12 @@ td[data-report-key="dateUpdated"] {
 
 html[data-layout~="headset"][data-layout~="htc_vive"] .footer {
   background: #111820;
+  opacity: 1;
+  color: rgba(255,255,255,.6);
+}
+
+html[data-layout~="headset"][data-layout~="google_cardboard"] .footer {
+  background: #333;
   opacity: 1;
   color: rgba(255,255,255,.6);
 }
