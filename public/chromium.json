@@ -71,46 +71,46 @@
   "audio": "",
   "platforms": {
     "htc_vive": {
-      "windows": "supported",
-      "mac": "headset_unsupported",
-      "linux": "headset_unsupported",
-      "android": "headset_unsupported",
-      "ios": "headset_unsupported"
+      "windows": "experimental",
+      "mac": false,
+      "linux": null,
+      "android": null,
+      "ios": null
     },
     "oculus_rift": {
-      "windows": "supported",
-      "mac": "headset_unsupported",
-      "linux": "headset_unsupported",
-      "android": "headset_unsupported",
-      "ios": "headset_unsupported"
+      "windows": "experimental",
+      "mac": false,
+      "linux": null,
+      "android": null,
+      "ios": null
     },
     "samsung_gear_vr": {
-      "windows": "headset_unsupported",
-      "mac": "headset_unsupported",
-      "linux": "headset_unsupported",
-      "android": "browser_unsupported",
-      "ios": "headset_unsupported"
+      "windows": null,
+      "mac": null,
+      "linux": null,
+      "android": false,
+      "ios": null
     },
     "google_daydream": {
-      "windows": "headset_unsupported",
-      "mac": "headset_unsupported",
-      "linux": "headset_unsupported",
-      "android": "supported",
-      "ios": "headset_unsupported"
+      "windows": null,
+      "mac": null,
+      "linux": null,
+      "android": "origin-trial",
+      "ios": null
     },
     "google_cardboard": {
-      "windows": "headset_unsupported",
-      "mac": "headset_unsupported",
-      "linux": "headset_unsupported",
-      "android": "supported",
-      "ios": "browser_unsupported"
+      "windows": null,
+      "mac": null,
+      "linux": null,
+      "android": "origin-trial",
+      "ios": null
     },
     "windows_mixed_reality": {
-      "windows": "browser_unsupported",
-      "mac": "headset_unsupported",
-      "linux": "headset_unsupported",
-      "android": "headset_unsupported",
-      "ios": "headset_unsupported"
+      "windows": false,
+      "mac": null,
+      "linux": null,
+      "android": null,
+      "ios": null
     }
   },
   "reports": [

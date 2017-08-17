@@ -143,15 +143,19 @@
 
 {% macro browser_platform_support (browser, headset, os) %}
   {% set support = browser.platforms[headset][os] %}
-  {% if support === 'supported' %}
+  {% if support >= 1 %}
     {% set classes = 'no-underline supported' %}
     {% set title = 'Supported' %}
     {% set text = '✅ <strong>Supported</strong>'|safe %}
-  {% elif support === 'headset_unsupported' %}
+  {% elif support > 0 %}
+    {% set classes = 'no-underline supported' %}
+    {% set title = 'Experimentally supported' %}
+    {% set text = '✅ <strong>Supported (experimental)</strong>'|safe %}
+  {% elif support == null %}
     {% set classes = 'no-underline unsupported headset-unsupported' %}
     {% set title = 'Unsupported OS by headset maker' %}
     {% set text = '❌' %}
-  {% elif support === 'browser_unsupported' %}
+  {% elif support == false %}
     {% set classes = 'no-underline unsupported browser-unsupported' %}
     {% set title = 'Unsupported browser support' %}
     {% set text = '❌' %}
@@ -191,6 +195,22 @@
   </li>
 {% endmacro %}
 
+{% macro platform_label (support) %}
+  {%- if support == 'stable' -%}
+    {{ 'Shipped' }}
+  {%- elif support == 'origin-trial' -%}
+    {{ 'Experimentally supported (Origin Trial)' }}
+  {%- elif support == 'experimental' -%}
+    {{ 'Experimentally supported' }}
+  {%- elif support == false -%}
+    {{ 'Unsupported by browser' }}
+  {%- elif support == null -%}
+    {{ 'Headset unsupported on operating system' }}
+  {%- else -%}
+    {{ 'Unsupported' }}
+  {%- endif -%}
+{% endmacro %}
+
 {% macro browser_item (slug, classes, id) %}
   {% set browser = browsers[slug] %}
   {% if not browser %}
@@ -223,68 +243,73 @@
         {% endfor %}
       {% endfor %}
 
-      <table class="table-support table-with-hover" data-supported-platforms="{{ supported_platforms|join(' ') }}" data-supported-headsets="{{ supported_headsets|join(' ') }}">
-        <thead>
-          <tr>
-            <th></th>
-            <th data-platform="windows"><a class="no-underline" href="/windows"><span class="hidden-text">Windows</span></a></th>
-            <th data-platform="mac"><a class="no-underline" href="/mac"><span class="hidden-text">Mac</span></a></th>
-            <th data-platform="linux"><a class="no-underline" href="/linux"><span class="hidden-text">Linux</span></a></th>
-            <th data-platform="android"><a class="no-underline" href="/android"><span class="hidden-text">Android</span></a></th>
-            <th data-platform="ios"><a class="no-underline" href="/ios"><span class="hidden-text">iOS</span></a></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr data-headset="htc_vive">
-            <th><a class="no-underline" href="{{ headsets.htc_vive.about }}"><span class="hidden-text">{{ headsets.htc_vive.name }}</span></a></th>
-            <td data-platform="windows">{{ browser_platform_support(browser, 'htc_vive', 'windows') }}</td>
-            <td data-platform="mac">{{ browser_platform_support(browser, 'htc_vive', 'mac') }}</td>
-            <td data-platform="linux">{{ browser_platform_support(browser, 'htc_vive', 'linux') }}</td>
-            <td data-platform="android">{{ browser_platform_support(browser, 'htc_vive', 'android') }}</td>
-            <td data-platform="ios">{{ browser_platform_support(browser, 'htc_vive', 'ios') }}</td>
-          </tr>
-          <tr data-headset="oculus_rift">
-            <th><a class="no-underline" href="{{ headsets.oculus_rift.about }}"><span class="hidden-text">{{ headsets.oculus_rift.name }}</span></a></th>
-            <td data-platform="windows">{{ browser_platform_support(browser, 'oculus_rift', 'windows') }}</td>
-            <td data-platform="mac">{{ browser_platform_support(browser, 'oculus_rift', 'mac') }}</td>
-            <td data-platform="linux">{{ browser_platform_support(browser, 'oculus_rift', 'linux') }}</td>
-            <td data-platform="android">{{ browser_platform_support(browser, 'oculus_rift', 'android') }}</td>
-            <td data-platform="ios">{{ browser_platform_support(browser, 'oculus_rift', 'ios') }}</td>
-          </tr>
-          <tr data-headset="samsung_gear_vr">
-            <th><a class="no-underline" href="{{ headsets.samsung_gear_vr.about }}"><span class="hidden-text">{{ headsets.samsung_gear_vr.name }}</span></a></th>
-            <td data-platform="windows">{{ browser_platform_support(browser, 'samsung_gear_vr', 'windows') }}</td>
-            <td data-platform="mac">{{ browser_platform_support(browser, 'samsung_gear_vr', 'mac') }}</td>
-            <td data-platform="linux">{{ browser_platform_support(browser, 'samsung_gear_vr', 'linux') }}</td>
-            <td data-platform="android">{{ browser_platform_support(browser, 'samsung_gear_vr', 'android') }}</td>
-            <td data-platform="ios">{{ browser_platform_support(browser, 'samsung_gear_vr', 'ios') }}</td>
-          </tr>
-          <tr data-headset="google_daydream">
-            <th><a class="no-underline" href="{{ headsets.google_daydream.about }}"><span class="hidden-text">{{ headsets.google_daydream.name }}</span></a></th>
-            <td data-platform="windows">{{ browser_platform_support(browser, 'google_daydream', 'windows') }}</td>
-            <td data-platform="mac">{{ browser_platform_support(browser, 'google_daydream', 'mac') }}</td>
-            <td data-platform="linux">{{ browser_platform_support(browser, 'google_daydream', 'linux') }}</td>
-            <td data-platform="android">{{ browser_platform_support(browser, 'google_daydream', 'android') }}</td>
-            <td data-platform="ios">{{ browser_platform_support(browser, 'google_daydream', 'ios') }}</td>
-          </tr>
-          <tr data-headset="google_cardboard">
-            <th><a class="no-underline" href="{{ headsets.google_cardboard.about }}"><span class="hidden-text">{{ headsets.google_cardboard.name }}</span></a></th>
-            <td data-platform="windows">{{ browser_platform_support(browser, 'google_cardboard', 'windows') }}</td>
-            <td data-platform="mac">{{ browser_platform_support(browser, 'google_cardboard', 'mac') }}</td>
-            <td data-platform="linux">{{ browser_platform_support(browser, 'google_cardboard', 'linux') }}</td>
-            <td data-platform="android">{{ browser_platform_support(browser, 'google_cardboard', 'android') }}</td>
-            <td data-platform="ios">{{ browser_platform_support(browser, 'google_cardboard', 'ios') }}</td>
-          </tr>
-          <tr data-headset="windows_mixed_reality">
-            <th><a class="no-underline" href="{{ headsets.windows_mixed_reality.about }}"><span class="hidden-text">{{ headsets.windows_mixed_reality.name }} headsets</span></a></th>
-            <td data-platform="windows">{{ browser_platform_support(browser, 'windows_mixed_reality', 'windows') }}</td>
-            <td data-platform="mac">{{ browser_platform_support(browser, 'windows_mixed_reality', 'mac') }}</td>
-            <td data-platform="linux">{{ browser_platform_support(browser, 'windows_mixed_reality', 'linux') }}</td>
-            <td data-platform="android">{{ browser_platform_support(browser, 'windows_mixed_reality', 'android') }}</td>
-            <td data-platform="ios">{{ browser_platform_support(browser, 'windows_mixed_reality', 'ios') }}</td>
-          </tr>
-        </tbody>
-      </table>
+      {% if browser.platforms|length %}
+        <ul class="platforms-supported">
+          {% set htcViveSupport = browser.platforms.oculus_rift %}
+          {% if htcViveSupport.windows or htcViveSupport.mac %}
+            <li>
+              <a href="{{ headsets.htc_vive.about }}">{{ headsets.htc_vive.name }}</a>
+              <ul>
+                <li><a href="{{ platforms.windows.about }}" title="{{ platform_label(htcViveSupport.windows) }}">{{ platforms.windows.name }}</a></li>
+                <li><a href="{{ platforms.mac.about }}" title="{{ platform_label(htcViveSupport.mac) }}">{{ platforms.mac.name }}</a></li>
+              </ul>
+            </li>
+          {% endif %}
+
+          {% set oculusRiftSupport = browser.platforms.oculus_rift %}
+          {% if oculusRiftSupport.windows or oculusRiftSupport.mac %}
+            <li>
+              <a href="{{ headsets.oculus_rift.about }}">{{ headsets.oculus_rift.name }}</a>
+              <ul>
+                <li><a href="{{ platforms.windows.about }}" title="{{ platform_label(oculusRiftSupport.windows) }}">{{ platforms.windows.name }}</a></li>
+                <li><a href="{{ platforms.mac.about }}" title="{{ platform_label(oculusRiftSupport.mac) }}">{{ platforms.mac.name }}</a></li>
+              </ul>
+            </li>
+          {% endif %}
+
+          {% set samsungGearVRSupport = browser.platforms.samsung_gear_vr %}
+          {% if samsungGearVRSupport.android %}
+            <li>
+              <a href="{{ headsets.samsung_gear_vr.about }}">{{ headsets.samsung_gear_vr.name }}</a>
+              <ul>
+                <li><a href="{{ platforms.samsung_gear_vr.about }}" title="{{ platform_label(samsungGearVRSupport.android) }}">{{ platforms.android.name }}</a></li>
+              </ul>
+            </li>
+          {% endif %}
+
+          {% set googleDaydreamSupport = browser.platforms.google_daydream %}
+          {% if googleDaydreamSupport.android or googleDaydreamSupport.ios %}
+            <li>
+              <a href="{{ headsets.google_daydream.about }}">{{ headsets.google_daydream.name }}</a>
+              <ul>
+                <li><a href="{{ platforms.android.about }}" title="{{ platform_label(googleDaydreamSupport.android) }}">{{ platforms.android.name }}</a></li>
+                <li><a href="{{ platforms.ios.about }}" title="{{ platform_label(googleDaydreamSupport.ios) }}">{{ platforms.ios.name }}</a></li>
+              </ul>
+            </li>
+          {% endif %}
+
+          {% set googleCardboardSupport = browser.platforms.google_cardboard %}
+          {% if googleCardboardSupport.android or googleCardboardSupport.ios %}
+            <li>
+              <a href="{{ headsets.google_cardboard.about }}">{{ headsets.google_cardboard.name }}</a>
+              <ul>
+                <li><a href="{{ platforms.android.about }}" title="{{ platform_label(googleCardboardSupport) }}">{{ platforms.android.name }}</a></li>
+                <li><a href="{{ platforms.ios.about }}" title="{{ platform_label(googleCardboardSupport) }}">{{ platforms.ios.name }}</a></li>
+              </ul>
+            </ul>
+          {% endif %}
+
+          {% set windowsMixedRealitySupport = browser.platforms.windows_mixed_reality %}
+          {% if windowsMixedRealitySupport.windows %}
+            <li>
+              <a href="{{ headsets.windows_mixed_reality.about }}">{{ headsets.windows_mixed_reality.name }}</a>
+              <ul>
+                <li><a href="{{ platforms.windows.about }}" title="{{ platform_label(windowsMixedRealitySupport) }}">{{ platforms.windows.name }}</a></li>
+              </ul>
+            </li>
+          {% endif %}
+        </ul>
+      {% endif %}
     </div>
   </li>
 {% endmacro %}
