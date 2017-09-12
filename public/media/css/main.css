@@ -1150,6 +1150,87 @@ tr[data-headset="windows_mixed_reality"] th a:before {
   width: 5.8rem;
 }
 
+.platforms-supported [data-headset] {
+  margin-top: 2rem;
+}
+
+.platforms-supported [data-headset] ul,
+.platforms-supported [data-headset] ul li {
+  padding-left: 0;
+}
+
+.platforms-supported [data-headset] > ul,
+.platforms-supported [data-headset] > ul li {
+  display: inline-block;
+}
+
+.platforms-supported [data-headset] > ul li {
+  filter: grayscale(1);
+  opacity: .6;
+  font-size: .7rem;
+}
+
+.platforms-supported [data-headset] > ul li:before {
+  content: " • ";
+  opacity: .2;
+}
+
+.platforms-supported [data-headset] > a {
+  border-bottom-width: 0;
+  /*border: 1px solid gray;
+  border-radius: 3px;
+  padding: 1rem;*/
+  display: inline-block;
+  /*padding: .5rem .75rem;*/
+  font-size: .8rem;
+  /*padding: 0 .75rem;*/
+}
+
+.platforms-supported [data-headset] > a:before {
+  border-top: 1px solid gray;
+  content: "";
+  display: inline-block;
+  margin-right: .75rem;
+  opacity: .25;
+  width: 6rem;
+}
+
+.platforms-supported [data-headset] > a:after {
+  background-position: 0% 50%;
+  background-repeat: no-repeat;
+  background-size: 4rem auto;
+  height: 4rem;
+  content: "";
+  display: block;
+  width: 6rem;
+}
+
+.platforms-supported [data-headset="htc_vive"] > a:after {
+  background-image: url(../../htc_vive/pictogram.svg);
+}
+
+.platforms-supported [data-headset="oculus_rift"] > a:after {
+  background-image: url(../../oculus_rift/pictogram.svg);
+}
+
+.platforms-supported [data-headset="samsung_gear_vr"] > a:after {
+  background-image: url(../../samsung_gear_vr/logo.png);
+}
+
+.platforms-supported [data-headset="google_daydream"] > a:after {
+  background-image: url(../../google_daydream/logo.svg);
+}
+
+.platforms-supported [data-headset="google_cardboard"] > a:after {
+  background-image: url(../../google_cardboard/logo.svg);
+}
+
+.platforms-supported [data-headset="windows_mixed_reality"] > a:after {
+  background-image: url(../../windows_mixed_reality/logo.svg);
+  height: 27px;
+  width: 5.8rem;
+}
+
 /*
 [data-supports-touch="true"] [data-section] a[itemprop="url"]:active,
 [data-supports-touch="false"] [data-section] a[itemprop="url"]:hover {
@@ -1629,6 +1710,16 @@ img.cover {
     border: 1px solid #e6eaed;
     border-radius: 3px;
     width: 6rem;
+  }
+
+  .matrix [itemprop="image"],
+  .platforms-supported [data-headset]:before {
+    width: 6rem;
+  }
+
+  .platforms-supported [data-headset]:before {
+    margin-top: 2rem;
+    padding-top: .5rem;
   }
 
   .matrix [itemprop="browser"] {
