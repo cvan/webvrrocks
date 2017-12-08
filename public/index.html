@@ -58,6 +58,39 @@
             {{ browser_item('servo') }}
           </ul>
         </section>
+
+        {% block browsers_block %}
+          <section id="browsers" class="section browsers" data-section="browsers">
+            <h2><a href="#browsers">{{ demos_heading or demos_title or 'Supported browsers' }}</a></h2>
+            {% block browsers %}
+              {% set browsers_list = [] %}
+              {% for os, browsers in headset.platforms %}
+                {% for browser in browsers %}
+                  {% if browser not in browsers_list %}
+                    {% set browsers_list = (browsers_list.push(browser), browsers_list) %}
+                  {% endif %}
+                {% endfor %}
+              {% endfor %}
+              {% for browser in browsers_list %}
+                <h3><a href="{{ browsers[browser].about }}" itemprop="aboutUrl">{{ browsers[browser].name }}</a></h3>
+                <p><a class="button button-outlined-approve button-download" href="{{ browsers[browser].about }}" itemprop="aboutUrl">Download</a></p>
+              {% endfor %}
+            {% endblock %}
+          </section>
+        {% endblock %}
+
+        {% block headsets_block %}
+          <section id="headsets" class="section headsets" data-section="headsets">
+            <h2><a href="#headsets">{{ demos_heading or demos_title or 'Supported headsets' }}</a></h2>
+            {% block headsets %}
+              {% set headsets_list = [] %}
+              {% for headset_slug in headsets %}
+                {% set headset = headsets[headset_slug] %}
+                <h3><a href="{{ headsets[headset_slug].about }}" itemprop="aboutUrl">{{ headset.name }}</a></h3>
+              {% endfor %}
+            {% endblock %}
+          </section>
+        {% endblock %}
       </div>
     </main>
 
