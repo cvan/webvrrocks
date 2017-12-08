@@ -367,6 +367,11 @@ h1.page-heading {
   transition: .15s opacity ease-in-out;
 }
 
+[data-tool~="debugging"] .page-heading-icon {
+  opacity: .6;
+  max-width: 26px;
+}
+
 .browser-icon {
   min-height: 70px;
   min-width: 70px;

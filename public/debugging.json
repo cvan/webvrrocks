@@ -1,0 +1,7 @@
+{
+  "slug": "debugging",
+  "name": "Remote Debugging",
+  "description": "Tips for testing and debugging your WebVR projects (using browser Developer Tools via locally, USB, and WiFi).",
+  "about": "/debugging",
+  "logo": "/debugging/pictogram.svg"
+}

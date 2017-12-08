@@ -5,7 +5,7 @@ const nunjucksMarkdown = require('nunjucks-markdown');
 
 const stripEverythingBeforeH2Element = true;
 
-const cleanSlug = slug => slug.replace('setup-instructions', 'setup');
+const cleanSlug = slug => slug.replace('setup-instructions', 'setup').replace(/\-+/g, '_');
 
 module.exports = function (nunjucksEnv) {
   nunjucksIncludeData.install(nunjucksEnv);

@@ -109,7 +109,7 @@ function startServer () {
         var isHTML = /\.html?$/i.test(ext);
 
         var isSharedTemplate = isHTML && path.basename(file).charAt(0) === '_';
-        if (file === OPTS.nunjucks.extensionsFile || isSharedTemplate || /\.json$/i.test(ext)) {
+        if (file === OPTS.nunjucks.extensionsFile || isSharedTemplate || /\.json$/i.test(ext) || /\.md$/i.test(ext)) {
           regenerateAllNunjucksTemplates();
         } else if (isHTML) {
           var fileRelativeNunjucks = path.relative(OPTS.nunjucks.inputDir, file);
