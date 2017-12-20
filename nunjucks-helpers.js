@@ -5,7 +5,30 @@ const nunjucksMarkdown = require('nunjucks-markdown');
 
 const stripEverythingBeforeH2Element = true;
 
-const cleanSlug = slug => slug.replace('setup-instructions', 'setup').replace(/\-+/g, '_');
+function generateSlug (str) {
+  // Adapted from https://gist.github.com/mathewbyrne/1280286#gistcomment-1761979
+  str = (str || '').replace(/^\s+|\s+$/g, '');  // Trim whitespace.
+  str = str.toLowerCase();
+
+  // Replace accents with their latin equivalents (e.g., swap ñ for n).
+  var before = 'àáäâèéëêìíïîòóöôùúüûñç·/_,:;';
+  var after  = 'aaaaeeeeiiiioooouuuunc______';
+
+  for (var i = 0, len = before.length; i < len; i++) {
+    str = str.replace(new RegExp(before.charAt(i), 'g'), after.charAt(i));
+  }
+
+  str = str.replace(/-+/g, '_')  // Collapse dashes to underscores.
+    .replace(/&/g, '_')  // Replace ampersands with underscores.
+    .replace(/\./g, '_')  // Collapse dashes to underscores.
+    .replace(/\s+/g, '_')  // Collapse whitespace to underscores.
+    .replace(/_+/g, '_')  // Collapse underscores.
+    .replace(/\W/g, '');  // Remove unaccepted characters.
+
+  return str;
+}
+
+const slugify = slug => generateSlug(slug.replace('setup-instructions', 'setup'));
 
 module.exports = function (nunjucksEnv) {
   nunjucksIncludeData.install(nunjucksEnv);
@@ -22,7 +45,7 @@ module.exports = function (nunjucksEnv) {
       dirty = dirty.substring(dirty.indexOf('<h2'));
     }
 
-    const $ = cheerio.load(dirty);
+    let $ = cheerio.load(dirty);
 
     $('ol, ul').each((idx, list) => {
       const $list = $(list);
@@ -35,13 +58,20 @@ module.exports = function (nunjucksEnv) {
 
     $('h2 > a').each((idx, a) => {
       const $a = $(a);
-      const id = cleanSlug($a.attr('id'));
-      const href = cleanSlug($a.attr('href'));
-      $a.attr('id', id);
-      $a.attr('href', href);
+
       const $h2 = $a.parent();
+
+      const id = slugify($a.attr('id'));
+      $h2.attr('id', id);
+
+      $a.removeAttr('aria-hidden');
+
+      const href = `#${id}`;
+      $a.attr('href', href);
+
       const headingText = $h2.text();
       $a.text(headingText);
+
       $h2.html($a);
 
       if (!html) {
@@ -67,6 +97,28 @@ module.exports = function (nunjucksEnv) {
       html = $('body').html();
     }
 
-    return html;
+    $ = cheerio.load(html);
+
+    $('h3').each((idx, h3) => {
+      const $h3 = $(h3);
+
+      const headingText = $h3.text();
+
+      const $a = $h3.find('a');
+      $a.removeAttr('aria-hidden');
+      $a.text(headingText);
+      // $h3.wrap('<a></a>');
+
+      const id = slugify(headingText);
+      console.log('id', id);
+      $h3.attr('id', id);
+
+      const href = `#${id}`;
+      $a.attr('href', href);
+
+      $h3.html($a);
+    });
+
+    return $('body').html();
   });
 };
